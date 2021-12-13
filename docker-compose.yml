@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  confuluence-publisher:
+    build: environment/docker-images/pandoc
+    tty: true
+    stdin_open: true
+    volumes:
+      - type: bind
+        source: "./"
+        target: "/workspace"
