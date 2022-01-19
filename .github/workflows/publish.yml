@@ -26,11 +26,6 @@ on:
         default: '1.14.0'
         required: false
         type: string
-      file_path:
-        description: 'File path'
-        default: ''
-        required: true
-        type: string
     secrets:
         CR_PAT:
             required: true
