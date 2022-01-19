@@ -2,3 +2,7 @@
 	path = environment
 	url = https://github.com/szk302/dev-blog-environment.git
 	branch = main
+[submodule "content"]
+	path = content
+	url = https://github.com/szk302/dev-blog-content.git
+	branch = main
