@@ -40,7 +40,13 @@ function publish () {
 
 cd `dirname "$0"`
 
-FILE_PATH=$1
+TEAM=$1
+USER_ID=$2
+API_KEY=$3
+SPACE_KEY=$4
+ANCESTOR_ID=$5
+FILE_PATH=$6
+
 FILE_NAME="${FILE_PATH##*/}"
 POST_DATA_TITLE="${FILE_NAME%%.adoc}_`TZ=Asia/Tokyo date +%Y%m%d_%H-%M-%S`"
 POST_DATA_FILE_PATH=post-data.html

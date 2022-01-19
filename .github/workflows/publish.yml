@@ -31,15 +31,15 @@ on:
             required: true
         GR_PAT:
             required: true
-        TEAM:
+        CONFLUENCE_TEAM:
             required: true
-        USER_ID:
+        CONFLUENCE_USER_ID:
             required: true
-        API_KEY:
+        CONFLUENCE_API_KEY:
             required: true
-        SPACE_KEY:
+        CONFLUENCE_SPACE_KEY:
             required: true
-        ANCESTOR_ID:
+        CONFLUENCE_ANCESTOR_ID:
             required: true
 
 jobs:
@@ -66,7 +66,7 @@ jobs:
         run: |
           chmod +x "${GITHUB_WORKSPACE}/build.sh"
           chmod +x "${GITHUB_WORKSPACE}/entrypoint.sh"
-          "${GITHUB_WORKSPACE}/entrypoint.sh"
+          "${GITHUB_WORKSPACE}/entrypoint.sh" ${{ secrets.CONFLUENCE_TEAM }} ${{ secrets.CONFLUENCE_USER_ID }} ${{ secrets.CONFLUENCE_API_KEY }} ${{ secrets.CONFLUENCE_SPACE_KEY }} ${{ secrets.CONFLUENCE_ANCESTOR_ID }}
       # - 
       #   name: Archive generated html
       #   uses: actions/upload-artifact@v2
