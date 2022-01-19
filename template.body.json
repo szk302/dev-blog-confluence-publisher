@@ -1,0 +1,19 @@
+{
+  "title": "",
+  "type": "page",
+  "space": {
+    "key": "DEV"
+  },
+  "status": "current",
+  "ancestors": [
+    {
+      "id": ""
+    }
+  ],
+  "body": {
+    "storage": {
+      "value": "",
+      "representation": "storage"
+    }
+  }
+}

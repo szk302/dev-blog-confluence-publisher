@@ -1,0 +1,80 @@
+name: Publish
+on:
+  workflow_dispatch: 
+    inputs:
+      pandoc_version:
+        description: 'Pandoc version'
+        default: '2.16.2'
+        required: false
+      asciidoctor_version:
+        description: 'Asciidoctor version'
+        default: '1.14.0'
+        required: false
+      file_path:
+        description: 'File path'
+        default: '0.80.0'
+        required: true
+  workflow_call:
+    inputs:
+      pandoc_version:
+        description: 'Pandoc version'
+        default: '2.16.2'
+        required: false
+        type: string
+      asciidoctor_version:
+        description: 'Asciidoctor version'
+        default: '1.14.0'
+        required: false
+        type: string
+      file_path:
+        description: 'File path'
+        default: ''
+        required: true
+        type: string
+    secrets:
+        CR_PAT:
+            required: true
+        GR_PAT:
+            required: true
+        TEAM:
+            required: true
+        USER_ID:
+            required: true
+        API_KEY:
+            required: true
+        SPACE_KEY:
+            required: true
+        ANCESTOR_ID:
+            required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/szk302/dev-blog-builder:pandoc-${{ inputs.pandoc_version }}_asciidoctor-${{ inputs.asciidoctor_version }}
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CR_PAT }}
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+        with:
+          github_token: ${{ secrets.GR_PAT }}
+          branch: main
+          repository: ${{ github.repository_owner }}/dev-blog-confluence-publisher
+      - 
+        name: Fetch content
+        run: git submodule update --init --recursive --remote
+      - 
+        name: Build
+        run: |
+          chmod +x "${GITHUB_WORKSPACE}/build.sh"
+          chmod +x "${GITHUB_WORKSPACE}/entrypoint.sh"
+          "${GITHUB_WORKSPACE}/entrypoint.sh"
+      # - 
+      #   name: Archive generated html
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: work
+      #     path: work
